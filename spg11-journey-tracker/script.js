@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initCookieConsent();
   initContactForm();
+  initThemeToggle();
 });
 
 /**
@@ -137,4 +138,42 @@ function initContactForm() {
       successModal.classList.remove('flex');
     });
   }
+}
+
+/**
+ * Handles the theme switching and persistency across pages
+ */
+function initThemeToggle() {
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (!toggleBtn) return;
+
+  const sunIcon = document.getElementById('sun-icon');
+  const moonIcon = document.getElementById('moon-icon');
+
+  function updateIcons(isDark) {
+    if (isDark) {
+      if (sunIcon) sunIcon.classList.remove('hidden');
+      if (moonIcon) moonIcon.classList.add('hidden');
+    } else {
+      if (sunIcon) sunIcon.classList.add('hidden');
+      if (moonIcon) moonIcon.classList.remove('hidden');
+    }
+  }
+
+  // Initial icon state setup
+  const isDark = document.documentElement.classList.contains('dark');
+  updateIcons(isDark);
+
+  toggleBtn.addEventListener('click', () => {
+    const currentlyDark = document.documentElement.classList.contains('dark');
+    if (currentlyDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('spg11_theme', 'light');
+      updateIcons(false);
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('spg11_theme', 'dark');
+      updateIcons(true);
+    }
+  });
 }
