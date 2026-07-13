@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fix sandboxed iframe window.fetch read-only getter issue -->
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return currentFetch; },
+            set: function(val) { currentFetch = val; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          console.warn('Unable to patch fetch getter/setter:', e);
+        }
+      })();
+    </script>
+    <title>Contact Support & Volunteer Advocates — SPG11 Journey Tracker</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-black selection:bg-orange/20 selection:text-orange">
+
+    <!-- Top Info Bar -->
+    <div class="bg-black text-white text-xs py-2 px-4 text-center font-medium tracking-wide">
+      <span>SPG11 Patient & Caregiver Education Portal — Non-Clinical Support Resource</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100/80 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-2 group focus-ring rounded-lg p-1" id="logo-link">
+          <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+          <div>
+            <span class="text-lg font-bold tracking-tight text-[#1A1A1A]">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="index.html" class="sleek-nav-link" id="nav-home">Home</a>
+          <a href="about.html" class="sleek-nav-link" id="nav-about">About Mission</a>
+          <a href="journey.html" class="sleek-nav-link" id="nav-journey">Journey Guide</a>
+          <a href="resources.html" class="sleek-nav-link" id="nav-resources">Resources</a>
+          <a href="contact.html" class="sleek-nav-link sleek-nav-link-active" id="nav-contact">Contact</a>
+        </nav>
+
+        <!-- CTAs & Mobile Toggle -->
+        <div class="flex items-center gap-4">
+          <a href="journey.html" class="hidden lg:inline-flex items-center justify-center px-4 py-1.5 bg-green hover:bg-green/90 text-white font-semibold text-xs rounded-full transition-all shadow-sm shadow-green/10" id="header-cta">
+            View Journey Guide
+          </a>
+          <button type="button" id="mobile-menu-btn" class="p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-lg transition-colors focus:outline-none" aria-label="Toggle Menu">
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 py-4 flex-col gap-2 shadow-inner">
+        <a href="index.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Home</a>
+        <a href="about.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">About Mission</a>
+        <a href="journey.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Journey Guide</a>
+        <a href="resources.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Resources</a>
+        <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Contact</a>
+        <div class="h-px bg-neutral-200 my-2"></div>
+        <a href="journey.html" class="block text-center px-4 py-3 bg-green text-white font-semibold rounded-lg text-sm transition-all shadow-md">
+          Explore Journey Guide
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="animate-fade-in py-12 md:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <!-- Header Text -->
+        <div class="text-center md:text-left space-y-3 max-w-3xl">
+          <span class="text-xs font-mono font-bold text-orange tracking-widest uppercase">COMMUNITY HUB</span>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-black tracking-tight leading-tight">
+            Connect with Portal Volunteers & Advocates
+          </h1>
+          <p class="text-lg text-neutral-600 leading-relaxed">
+            Have general feedback, or a verified peer-reviewed paper to add to our resource index? Reach out to our volunteer advocacy team.
+          </p>
+        </div>
+
+        <div class="h-px bg-neutral-200"></div>
+
+        <div class="grid md:grid-cols-12 gap-12 items-start">
+          
+          <!-- Column Left: Contact Form -->
+          <div class="md:col-span-7 sleek-card p-6 sm:p-8 space-y-6">
+            <div>
+              <h2 class="text-xl font-bold text-black">Send a Message</h2>
+              <p class="text-xs text-neutral-500 mt-1 leading-relaxed">
+                Required fields are indicated by an asterisk (*). We respect your privacy. No personal data submitted here is shared or used for target advertising.
+              </p>
+            </div>
+
+            <form id="spg11-contact-form" class="space-y-4">
+              
+              <!-- Name Input -->
+              <div class="space-y-1">
+                <label for="contact-name" class="block text-xs font-bold text-neutral-700 uppercase">Your Name *</label>
+                <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:border-orange focus:outline-none bg-white text-sm" />
+              </div>
+
+              <!-- Email Input -->
+              <div class="space-y-1">
+                <label for="contact-email" class="block text-xs font-bold text-neutral-700 uppercase">Your Email Address *</label>
+                <input type="email" id="contact-email" required placeholder="john@example.com" class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:border-orange focus:outline-none bg-white text-sm" />
+              </div>
+
+              <!-- Subject Category Selection -->
+              <div class="space-y-1">
+                <label for="contact-category" class="block text-xs font-bold text-neutral-700 uppercase">Inquiry Category</label>
+                <select id="contact-category" class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:border-orange focus:outline-none bg-white text-sm">
+                  <option value="General Support">General Support Query</option>
+                  <option value="Resource Submission">New Resource Link Submission</option>
+                  <option value="AdSense / Partnerships">Advertising / Partner Inquiry</option>
+                  <option value="Accessibility Issue">Accessibility or Bug Feedback</option>
+                </select>
+              </div>
+
+              <!-- Message Input -->
+              <div class="space-y-1">
+                <label for="contact-message" class="block text-xs font-bold text-neutral-700 uppercase">Your Message *</label>
+                <textarea id="contact-message" rows="5" required placeholder="Describe your request in detail..." class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:border-orange focus:outline-none bg-white text-sm"></textarea>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" class="w-full px-5 py-3.5 bg-orange hover:bg-orange/95 text-white font-bold text-sm rounded-lg transition-all shadow-md shadow-orange/10 cursor-pointer text-center">
+                Submit Message Securely
+              </button>
+
+            </form>
+          </div>
+
+          <!-- Column Right: Alternative Contact Context -->
+          <div class="md:col-span-5 space-y-6">
+            
+            <div class="sleek-card p-6 space-y-4">
+              <h3 class="text-base font-bold text-black border-b border-neutral-100 pb-2">Direct Contact Details</h3>
+              <p class="text-xs text-neutral-600 leading-relaxed">
+                If you prefer to bypass web forms, you can contact our coordination desk directly via standard electronic mail:
+              </p>
+              
+              <div class="p-3 bg-neutral-50 rounded-lg border border-neutral-100 font-mono text-xs text-orange break-all">
+                <a href="mailto:advocacy@spg11journey.org" class="hover:underline">advocacy@spg11journey.org</a>
+              </div>
+              
+              <p class="text-xs text-neutral-500 leading-relaxed">
+                *Please note: We do not review attachment files containing private clinical MRI images or personal sequencing reports to adhere to medical liability standards.
+              </p>
+            </div>
+
+            <!-- AdSense slot styled nicely -->
+            <div class="p-6 border border-neutral-200 rounded-2xl bg-neutral-50 text-center">
+              <span class="text-[9px] font-mono tracking-widest text-neutral-400 uppercase block mb-2">ADVERTISEMENT</span>
+              <div class="bg-neutral-100 border border-dashed border-neutral-300 rounded-lg py-12 px-4 flex flex-col items-center justify-center">
+                <span class="text-xs text-neutral-400 font-mono">Google AdSense Area</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Unified Footer -->
+    <footer class="bg-neutral-950 text-neutral-400 border-t border-neutral-900 pt-16 pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-neutral-900">
+          <div class="md:col-span-5 space-y-4">
+            <a href="index.html" class="flex items-center gap-2 group p-1">
+              <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+              <span class="text-lg font-bold text-white tracking-tight">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+            </a>
+            <p class="text-sm text-neutral-500 leading-relaxed max-w-sm">
+              Providing patient empowerment, supportive staging maps, and highly authentic resources for families navigating Spastic Paraplegia type 11.
+            </p>
+          </div>
+
+          <div class="md:col-span-3 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Explore Guide</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="index.html" class="hover:text-white transition-colors">Home Portal</a></li>
+              <li><a href="about.html" class="hover:text-white transition-colors">About Our Mission</a></li>
+              <li><a href="journey.html" class="hover:text-white transition-colors">Journey & Stages</a></li>
+              <li><a href="resources.html" class="hover:text-white transition-colors">Curated Resources</a></li>
+            </ul>
+          </div>
+
+          <div class="md:col-span-4 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Support & Legal</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="contact.html" class="hover:text-white transition-colors">Contact Support Form</a></li>
+              <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy (AdSense Disclosure)</a></li>
+              <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Use Agreement</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-neutral-900 border border-neutral-800 rounded-xl space-y-3" id="universal-disclaimer-box">
+          <div class="flex items-center gap-2 text-orange font-bold text-sm">
+            <span>⚠️</span> UNIVERSAL MEDICAL DISCLAIMER
+          </div>
+          <p class="text-xs text-neutral-500 leading-relaxed">
+            The informational materials published on SPG11 Journey Tracker are compiled from public neuro-genetic data for educational guidance. No statements, diagrams, symptoms, or resource references represent clinical guidance, professional medical recommendations, diagnoses, prognosis, or active therapies. Always prioritize consulting with licensed neurologists, geneticists, or clinical speech-language therapists when tailoring specific family care plans. Never delay medical consultations based on resources located on this site.
+          </p>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600">
+          <span>&copy; 2026 SPG11 Journey Tracker. Compiled by rare disease community advocates.</span>
+          <span class="text-center sm:text-right">Structured to fully align with Google AdSense and rare-disease accessibility compliance rules.</span>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Form Successful Submission Dialog Overlap Modal -->
+    <div id="contact-success-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
+      <div class="bg-white border border-neutral-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-4 shadow-2xl animate-scale-up">
+        <div class="w-12 h-12 rounded-xl bg-green/10 text-green flex items-center justify-center font-bold text-lg">
+          ✓
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-lg font-bold text-black">Message Sent Successfully!</h3>
+          <p class="text-xs text-neutral-500">Inquiry Received by Volunteer Panel</p>
+        </div>
+        <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+          Thank you for reaching out to the SPG11 Journey advocacy desk. Your correspondence has been registered securely. Our volunteer staff reviews portal submissions twice a week and will reply to your provided electronic mail address if required.
+        </p>
+        <button type="button" id="close-success-modal" class="w-full px-4 py-2.5 bg-black hover:bg-neutral-800 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer text-center">
+          Dismiss & Return
+        </button>
+      </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookie-consent-banner" class="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-neutral-900 text-white border-t border-neutral-800 shadow-2xl transform translate-y-full transition-transform duration-500 ease-in-out">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1 max-w-4xl">
+          <div class="flex items-center gap-2 text-sm font-bold text-orange">
+            <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+            Privacy & Advertising Preferences
+          </div>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            We use cookies and serve advertisements to support our rare-disease community resource. Ad networks like Google AdSense use cookies to deliver personalized advertising. By continuing to explore our portal, you agree to our cookie policy, terms, and privacy settings as detailed in our <a href="privacy-policy.html" class="underline text-orange hover:text-orange/80">Privacy Policy</a>.
+          </p>
+        </div>
+        <button type="button" id="cookie-accept-btn" class="w-full md:w-auto px-5 py-2.5 bg-orange hover:bg-orange/90 text-white font-medium text-sm rounded-lg transition-colors cursor-pointer whitespace-nowrap text-center">
+          Accept & Close
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

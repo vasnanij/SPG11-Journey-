@@ -1,0 +1,6 @@
+{
+  "name": "SPG11 Journey Tracker",
+  "description": "An informational and community resource for SPG11 (Spastic Paraplegia type 11) patients and caregivers, providing a public-facing journey tracker, resources, and AdSense-compliant structural policy pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

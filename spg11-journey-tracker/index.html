@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fix sandboxed iframe window.fetch read-only getter issue -->
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return currentFetch; },
+            set: function(val) { currentFetch = val; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          console.warn('Unable to patch fetch getter/setter:', e);
+        }
+      })();
+    </script>
+    <title>SPG11 Journey Tracker — Patient & Caregiver Resource Portal</title>
+    <!-- CSS Link which compiles via Vite Tailwind v4 -->
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Pre-import Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-black selection:bg-orange/20 selection:text-orange">
+
+    <!-- Top Info Bar -->
+    <div class="bg-black text-white text-xs py-2 px-4 text-center font-medium tracking-wide">
+      <span>SPG11 Patient & Caregiver Education Portal — Non-Clinical Support Resource</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100/80 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-2 group focus-ring rounded-lg p-1" id="logo-link">
+          <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+          <div>
+            <span class="text-lg font-bold tracking-tight text-[#1A1A1A]">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="index.html" class="sleek-nav-link sleek-nav-link-active" id="nav-home">Home</a>
+          <a href="about.html" class="sleek-nav-link" id="nav-about">About Mission</a>
+          <a href="journey.html" class="sleek-nav-link" id="nav-journey">Journey Guide</a>
+          <a href="resources.html" class="sleek-nav-link" id="nav-resources">Resources</a>
+          <a href="contact.html" class="sleek-nav-link" id="nav-contact">Contact</a>
+        </nav>
+
+        <!-- CTAs & Mobile Toggle -->
+        <div class="flex items-center gap-4">
+          <a href="journey.html" class="hidden lg:inline-flex items-center justify-center px-4 py-1.5 bg-green hover:bg-green/90 text-white font-semibold text-xs rounded-full transition-all shadow-sm shadow-green/10" id="header-cta">
+            View Journey Guide
+          </a>
+          <!-- Mobile Menu Button -->
+          <button type="button" id="mobile-menu-btn" class="md:hidden p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-lg transition-colors focus:outline-none" aria-label="Toggle Menu">
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Navigation Menu (Drawer/List) -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 py-4 flex-col gap-2 shadow-inner">
+        <a href="index.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Home</a>
+        <a href="about.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">About Mission</a>
+        <a href="journey.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Journey Guide</a>
+        <a href="resources.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Resources</a>
+        <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Contact</a>
+        <div class="h-px bg-neutral-200 my-2"></div>
+        <a href="journey.html" class="block text-center px-4 py-3 bg-green text-white font-semibold rounded-lg text-sm transition-all shadow-md">
+          Explore Journey Guide
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="animate-fade-in">
+      
+      <!-- Premium Hero Section -->
+      <section class="relative bg-white overflow-hidden py-16 md:py-24 border-b border-gray-100" id="hero">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green/5 via-transparent to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+            
+            <!-- Hero Left: Text & CTA -->
+            <div class="lg:col-span-7 space-y-6">
+              <div class="sleek-badge">
+                <span class="w-1.5 h-1.5 rounded-full bg-green animate-pulse"></span>
+                Autosomal Recessive HSP Support
+              </div>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-black leading-tight">
+                Navigating the <span class="text-orange font-bold">SPG11</span> Rare Disease Journey
+              </h1>
+              <p class="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-2xl">
+                A compassionate, comprehensive educational portal providing vital disease timeline parameters, clinical care structures, and supportive resources for patients, families, and caregivers.
+              </p>
+              
+              <!-- CTAs -->
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                <a href="journey.html" class="sleek-btn-primary">
+                  Explore Journey Guide
+                </a>
+                <a href="resources.html" class="sleek-btn-secondary">
+                  Access Curated Resources
+                </a>
+              </div>
+            </div>
+
+            <!-- Hero Right: Quick Visual Summary Panel -->
+            <div class="mt-12 lg:mt-0 lg:col-span-5">
+              <div class="sleek-card p-6 sm:p-8 relative">
+                <div class="absolute -top-3 -right-3 px-3 py-1 bg-orange text-white text-xs font-bold tracking-widest uppercase rounded-lg shadow-sm">
+                  KEY FACTS
+                </div>
+                <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2 border-b border-gray-100 pb-3">
+                  <span class="text-green">💡</span> Understanding SPG11
+                </h3>
+                <ul class="space-y-4">
+                  <li class="flex items-start gap-3">
+                    <span class="text-orange font-bold mt-0.5">•</span>
+                    <div>
+                      <strong class="text-black text-sm block">Genetic Mutation</strong>
+                      <span class="text-xs text-neutral-600">Caused by autosomal recessive mutations in the <code class="bg-neutral-100 px-1 py-0.5 rounded text-orange">SPG11</code> gene encoding the spastizin protein.</span>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-orange font-bold mt-0.5">•</span>
+                    <div>
+                      <strong class="text-black text-sm block">Core Symptoms</strong>
+                      <span class="text-xs text-neutral-600">Progressive stiffness (spasticity) in lower limbs, learning challenges, and thinning of the corpus callosum.</span>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-orange font-bold mt-0.5">•</span>
+                    <div>
+                      <strong class="text-black text-sm block">Supportive Care</strong>
+                      <span class="text-xs text-neutral-600">Relies heavily on multidisciplinary teams, including physical therapy, neurology, and orthopedics.</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Crucial Medical Disclaimer Banner -->
+      <section class="bg-[#FEF3C7] border-y border-[#FDE68A] py-5 text-[#92400E]" id="homepage-disclaimer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-start gap-3 max-w-4xl">
+            <div class="w-10 h-10 rounded-lg bg-[#F59E0B]/10 flex items-center justify-center text-[#D97706] shrink-0 mt-0.5">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-[#78350F] uppercase tracking-wider">Critical Medical Disclaimer</h4>
+              <p class="text-xs sm:text-sm text-[#78350F] leading-relaxed mt-0.5">
+                This portal is exclusively designed for public education and caregiver empowerment. <strong>It does not provide clinical guidance or medical advice.</strong> Diagnoses, disease tracking, and treatment parameters must be developed in consultation with certified neuro-genetic professionals.
+              </p>
+            </div>
+          </div>
+          <a href="about.html" class="inline-flex items-center text-xs font-bold text-[#D97706] hover:text-[#B45309] underline shrink-0">
+            Learn More About Our Mission →
+          </a>
+        </div>
+      </section>
+
+      <!-- Informational Overview (Symptom & Progression Introduction) -->
+      <section class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="about-spg11">
+        <div class="grid lg:grid-cols-12 lg:gap-16 items-center">
+          
+          <!-- Column 1: Graphic / Descriptive Blocks -->
+          <div class="lg:col-span-5 space-y-6">
+            <h2 class="text-3xl font-extrabold tracking-tight text-black">
+              Empowering Families with Scientific Knowledge
+            </h2>
+            <p class="text-neutral-600 leading-relaxed text-base">
+              Spastic Paraplegia Type 11 belongs to a group of rare inherited disorders known as Hereditary Spastic Paraplegias (HSPs). While it represents one of the most common autosomal recessive complex HSP subtypes, the medical landscape is complex.
+            </p>
+            <p class="text-neutral-600 leading-relaxed text-base">
+              Understanding clinical timelines, monitoring symptoms proactively, and seeking out collaborative expert networks can drastically improve clinical management and life outcomes for patients.
+            </p>
+            
+            <div class="p-5 bg-neutral-50 rounded-xl border border-neutral-200">
+              <span class="text-xs font-mono font-bold text-green uppercase block mb-1">Diagnostic Signature</span>
+              <p class="text-sm text-black font-semibold">
+                Thinning of the corpus callosum (TCC) on a brain MRI is a classic hallmark diagnostic indicator of SPG11.
+              </p>
+            </div>
+          </div>
+
+          <!-- Column 2: Disease Core Characteristics Grid -->
+          <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6 mt-12 lg:mt-0">
+            
+            <!-- Card 1 -->
+            <div class="sleek-card p-6">
+              <div class="w-10 h-10 rounded-lg bg-green/10 text-green flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-black mb-2">Patient Caregivers</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Empowering advocates with detailed staging data to navigate physical shifts, orthotic setups, and daily activity supports.
+              </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="sleek-card p-6">
+              <div class="w-10 h-10 rounded-lg bg-orange/10 text-orange flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-black mb-2">Clinical Stages</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Laying out logical milestones representing progression stages from initial learning adaptations to complex mobility adjustments.
+              </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="sleek-card p-6">
+              <div class="w-10 h-10 rounded-lg bg-orange/10 text-orange flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-black mb-2">Support Networks</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Bridging families with credible international research networks, genetic counselors, and leading clinical trial registries.
+              </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="sleek-card p-6">
+              <div class="w-10 h-10 rounded-lg bg-green/10 text-green flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-black mb-2">Policy Compliant</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Engineered with rigid adherence to global policies, complete with formal terms, safety criteria, and cookie disclosures.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Interactive Journey Map CTA / Bento Grid Navigation Section -->
+      <section class="bg-neutral-50 border-y border-neutral-200 py-16" id="bento-navigation">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl font-extrabold text-black tracking-tight">Structured Learning Tracks</h2>
+            <p class="text-neutral-600 mt-3">Select a specialized track below to begin exploring disease parameters, policy files, and community forms.</p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            
+            <!-- Track 1: Journey Guide -->
+            <div class="sleek-card sleek-card-accent p-6 flex flex-col justify-between group">
+              <div>
+                <span class="text-xs font-mono font-bold text-orange tracking-widest uppercase">TRACK 01</span>
+                <h3 class="text-xl font-bold text-[#1A1A1A] mt-2 group-hover:text-orange transition-colors">Journey & Stages</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed mt-3">
+                  Dive into the structured physiological progression of SPG11, highlighting gait adjustments, diagnostic tools, cognitive structures, and therapy outlines.
+                </p>
+              </div>
+              <div class="mt-6">
+                <a href="journey.html" class="inline-flex items-center gap-1.5 text-sm font-bold text-orange hover:gap-2.5 transition-all">
+                  Read Journey Guide <span>→</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Track 2: Resource Library -->
+            <div class="sleek-card sleek-card-accent-green p-6 flex flex-col justify-between group">
+              <div>
+                <span class="text-xs font-mono font-bold text-green tracking-widest uppercase">TRACK 02</span>
+                <h3 class="text-xl font-bold text-[#1A1A1A] mt-2 group-hover:text-green transition-colors">Resource Library</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed mt-3">
+                  Access a curated, high-authority directory linking directly to international foundations, active research programs, clinical trial databases, and scientific papers.
+                </p>
+              </div>
+              <div class="mt-6">
+                <a href="resources.html" class="inline-flex items-center gap-1.5 text-sm font-bold text-green hover:gap-2.5 transition-all">
+                  Browse Resources <span>→</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Track 3: Mission & Support -->
+            <div class="sleek-card p-6 flex flex-col justify-between group">
+              <div>
+                <span class="text-xs font-mono font-bold text-neutral-500 tracking-widest uppercase">TRACK 03</span>
+                <h3 class="text-xl font-bold text-[#1A1A1A] mt-2 group-hover:text-orange transition-colors">About Our Mission</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed mt-3">
+                  Discover the genesis of our portal, our strict editorial policy of non-commercial content delivery, and how we empower families without therapeutic conflicts.
+                </p>
+              </div>
+              <div class="mt-6">
+                <a href="about.html" class="inline-flex items-center gap-1.5 text-sm font-bold text-black hover:text-orange transition-colors">
+                  Explore Mission <span>→</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Standard Compliant Google AdSense Ad Placement Mock -->
+      <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="adsense-section">
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-4 text-center">
+          <span class="text-[10px] font-mono tracking-widest text-neutral-400 uppercase block mb-2">ADVERTISEMENT</span>
+          <!-- Beautifully styled AdSense Banner placeholder -->
+          <div class="bg-neutral-100 border border-dashed border-neutral-300 rounded-xl py-8 px-4 flex flex-col items-center justify-center max-w-3xl mx-auto">
+            <span class="text-xs text-neutral-400 font-mono">Google AdSense Placement Area</span>
+            <span class="text-xs text-neutral-500 font-sans mt-1">Sponsors support the open distribution of rare disease materials. All advertisements are subject to strict category screening.</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Unified Footer -->
+    <footer class="bg-neutral-950 text-neutral-400 border-t border-neutral-900 pt-16 pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Grid Links -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-neutral-900">
+          
+          <!-- Column 1: App Branding -->
+          <div class="md:col-span-5 space-y-4">
+            <a href="index.html" class="flex items-center gap-2 group p-1">
+              <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+              <span class="text-lg font-bold text-white tracking-tight">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+            </a>
+            <p class="text-sm text-neutral-500 leading-relaxed max-w-sm">
+              Providing patient empowerment, supportive staging maps, and highly authentic resources for families navigating Spastic Paraplegia type 11.
+            </p>
+          </div>
+
+          <!-- Column 2: Portal Navigation -->
+          <div class="md:col-span-3 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Explore Guide</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="index.html" class="hover:text-white transition-colors">Home Portal</a></li>
+              <li><a href="about.html" class="hover:text-white transition-colors">About Our Mission</a></li>
+              <li><a href="journey.html" class="hover:text-white transition-colors">Journey & Stages</a></li>
+              <li><a href="resources.html" class="hover:text-white transition-colors">Curated Resources</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Policy & Legal -->
+          <div class="md:col-span-4 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Support & Legal</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="contact.html" class="hover:text-white transition-colors">Contact Support Form</a></li>
+              <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy (AdSense Disclosure)</a></li>
+              <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Use Agreement</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Strict Medical Disclaimer Box (Universal Requirement) -->
+        <div class="mt-12 p-6 bg-neutral-900 border border-neutral-800 rounded-xl space-y-3" id="universal-disclaimer-box">
+          <div class="flex items-center gap-2 text-orange font-bold text-sm">
+            <span>⚠️</span> UNIVERSAL MEDICAL DISCLAIMER
+          </div>
+          <p class="text-xs text-neutral-500 leading-relaxed">
+            The informational materials published on SPG11 Journey Tracker are compiled from public neuro-genetic data for educational guidance. No statements, diagrams, symptoms, or resource references represent clinical guidance, professional medical recommendations, diagnoses, prognosis, or active therapies. Always prioritize consulting with licensed neurologists, geneticists, or clinical speech-language therapists when tailoring specific family care plans. Never delay medical consultations based on resources located on this site.
+          </p>
+        </div>
+
+        <!-- Copyright and Policy compliance disclosures -->
+        <div class="mt-12 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600">
+          <span>&copy; 2026 SPG11 Journey Tracker. Compiled by rare disease community advocates.</span>
+          <span class="text-center sm:text-right">Structured to fully align with Google AdSense and rare-disease accessibility compliance rules.</span>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Google AdSense Policy Cookie Consent Banner (Slide-up) -->
+    <div id="cookie-consent-banner" class="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-neutral-900 text-white border-t border-neutral-800 shadow-2xl transform translate-y-full transition-transform duration-500 ease-in-out">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1 max-w-4xl">
+          <div class="flex items-center gap-2 text-sm font-bold text-orange">
+            <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+            Privacy & Advertising Preferences
+          </div>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            We use cookies and serve advertisements to support our rare-disease community resource. Ad networks like Google AdSense use cookies to deliver personalized advertising. By continuing to explore our portal, you agree to our cookie policy, terms, and privacy settings as detailed in our <a href="privacy-policy.html" class="underline text-orange hover:text-orange/80">Privacy Policy</a>.
+          </p>
+        </div>
+        <button type="button" id="cookie-accept-btn" class="w-full md:w-auto px-5 py-2.5 bg-orange hover:bg-orange/90 text-white font-medium text-sm rounded-lg transition-colors cursor-pointer whitespace-nowrap text-center">
+          Accept & Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Script Link which runs via Vite -->
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fix sandboxed iframe window.fetch read-only getter issue -->
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return currentFetch; },
+            set: function(val) { currentFetch = val; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          console.warn('Unable to patch fetch getter/setter:', e);
+        }
+      })();
+    </script>
+    <title>SPG11 Disease Journey & Stages — SPG11 Journey Tracker</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-black selection:bg-orange/20 selection:text-orange">
+
+    <!-- Top Info Bar -->
+    <div class="bg-black text-white text-xs py-2 px-4 text-center font-medium tracking-wide">
+      <span>SPG11 Patient & Caregiver Education Portal — Non-Clinical Support Resource</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100/80 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-2 group focus-ring rounded-lg p-1" id="logo-link">
+          <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+          <div>
+            <span class="text-lg font-bold tracking-tight text-[#1A1A1A]">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="index.html" class="sleek-nav-link" id="nav-home">Home</a>
+          <a href="about.html" class="sleek-nav-link" id="nav-about">About Mission</a>
+          <a href="journey.html" class="sleek-nav-link sleek-nav-link-active" id="nav-journey">Journey Guide</a>
+          <a href="resources.html" class="sleek-nav-link" id="nav-resources">Resources</a>
+          <a href="contact.html" class="sleek-nav-link" id="nav-contact">Contact</a>
+        </nav>
+
+        <!-- CTAs & Mobile Toggle -->
+        <div class="flex items-center gap-4">
+          <a href="journey.html" class="hidden lg:inline-flex items-center justify-center px-4 py-1.5 bg-green hover:bg-green/90 text-white font-semibold text-xs rounded-full transition-all shadow-sm shadow-green/10" id="header-cta">
+            View Journey Guide
+          </a>
+          <button type="button" id="mobile-menu-btn" class="p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-lg transition-colors focus:outline-none" aria-label="Toggle Menu">
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 py-4 flex-col gap-2 shadow-inner">
+        <a href="index.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Home</a>
+        <a href="about.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">About Mission</a>
+        <a href="journey.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Journey Guide</a>
+        <a href="resources.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Resources</a>
+        <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Contact</a>
+        <div class="h-px bg-neutral-200 my-2"></div>
+        <a href="journey.html" class="block text-center px-4 py-3 bg-green text-white font-semibold rounded-lg text-sm transition-all shadow-md">
+          Explore Journey Guide
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="animate-fade-in py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header Text -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-mono font-bold text-green tracking-widest uppercase">SPG11 PHASES & PIPELINE</span>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black tracking-tight mt-2 leading-tight">
+            The SPG11 Clinical Timeline & Journey
+          </h1>
+          <p class="text-neutral-600 mt-4 text-base sm:text-lg leading-relaxed">
+            Understanding the progression stages of Spastic Paraplegia type 11 helps caregivers build proactive clinical schedules, therapy guidelines, and supportive household environments.
+          </p>
+        </div>
+
+        <!-- Strict Medical Disclaimer Block -->
+        <section class="mb-12 sleek-disclaimer-box p-6 max-w-4xl mx-auto flex gap-4 items-start">
+          <div class="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center text-orange shrink-0">
+            ⚠️
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-bold text-[#78350F] uppercase tracking-wider">Visible Clinical Disclaimer</h4>
+            <p class="text-xs sm:text-sm text-[#78350F] leading-relaxed">
+              SPG11 has highly heterogenous clinical profiles. The stages detailed below represent generalized clinical progression models compiled from academic literature. They are strictly informational and <strong>must not be utilized for self-diagnosis, disease staging, or prescribing treatment models.</strong> Work closely with certified neurologists to evaluate individual symptoms.
+            </p>
+          </div>
+        </section>
+
+        <!-- Interactive Stage Selector Timeline Component -->
+        <div class="max-w-5xl mx-auto border border-neutral-200 rounded-3xl overflow-hidden bg-white shadow-xl grid md:grid-cols-12">
+          
+          <!-- Column Left: Interactive Timeline Nav -->
+          <div class="md:col-span-4 bg-neutral-50 border-r border-neutral-200 p-6 md:p-8 flex flex-col justify-between gap-8">
+            <div class="space-y-6">
+              <h3 class="text-xs font-bold font-mono text-neutral-400 tracking-wider uppercase">Journey Progression Tracker</h3>
+              
+              <!-- Timeline buttons -->
+              <div class="space-y-3">
+                
+                <!-- Stage 1 btn -->
+                <button type="button" onclick="switchStage(1)" id="stage-btn-1" class="w-full text-left p-4 rounded-xl border border-orange/35 bg-white shadow-sm flex items-start gap-3 group transition-all cursor-pointer">
+                  <div class="w-8 h-8 rounded-lg bg-orange text-white flex items-center justify-center text-xs font-mono font-bold shrink-0">01</div>
+                  <div>
+                    <h4 class="text-sm font-bold text-black group-hover:text-orange transition-colors">Stage 1: Early Onset</h4>
+                    <span class="text-[11px] text-neutral-500 font-mono">Ages 10–20 • Diagnosis</span>
+                  </div>
+                </button>
+
+                <!-- Stage 2 btn -->
+                <button type="button" onclick="switchStage(2)" id="stage-btn-2" class="w-full text-left p-4 rounded-xl border border-neutral-200 hover:border-green/30 hover:bg-neutral-100 flex items-start gap-3 group transition-all cursor-pointer">
+                  <div class="w-8 h-8 rounded-lg bg-neutral-200 text-neutral-600 flex items-center justify-center text-xs font-mono font-bold shrink-0">02</div>
+                  <div>
+                    <h4 class="text-sm font-semibold text-neutral-700 group-hover:text-green transition-colors">Stage 2: Motor Shift</h4>
+                    <span class="text-[11px] text-neutral-500 font-mono">5–10 Years Post-Onset</span>
+                  </div>
+                </button>
+
+                <!-- Stage 3 btn -->
+                <button type="button" onclick="switchStage(3)" id="stage-btn-3" class="w-full text-left p-4 rounded-xl border border-neutral-200 hover:border-green/30 hover:bg-neutral-100 flex items-start gap-3 group transition-all cursor-pointer">
+                  <div class="w-8 h-8 rounded-lg bg-neutral-200 text-neutral-600 flex items-center justify-center text-xs font-mono font-bold shrink-0">03</div>
+                  <div>
+                    <h4 class="text-sm font-semibold text-neutral-700 group-hover:text-green transition-colors">Stage 3: Advanced Care</h4>
+                    <span class="text-[11px] text-neutral-500 font-mono">10+ Years Post-Onset</span>
+                  </div>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- Contextual Tip box -->
+            <div class="p-4 bg-green/10 border border-green/20 rounded-xl">
+              <span class="text-[10px] font-mono font-bold text-green uppercase tracking-wider block mb-1">PRO TIP FOR CAREGIVERS</span>
+              <p class="text-xs text-neutral-700 leading-relaxed">
+                Early intervention with targeted physical and speech therapies is associated with better management of symptoms in later stages.
+              </p>
+            </div>
+          </div>
+
+          <!-- Column Right: Stage Content Displays -->
+          <div class="md:col-span-8 p-6 sm:p-8 md:p-10 space-y-6">
+            
+            <!-- Stage 1 Content (Active by default) -->
+            <div id="stage-content-1" class="space-y-6">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 bg-orange/10 text-orange rounded-md text-xs font-mono font-bold">STAGE 01</span>
+                <span class="text-xs font-bold text-neutral-500 uppercase tracking-widest">Early Detection & Diagnostics</span>
+              </div>
+              <h3 class="text-2xl font-extrabold text-black">Stage 1: Presentation & Diagnostic Confirmation</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                The early stage of SPG11 typically begins between ages 10 and 20, though it can occasionally manifest earlier. Initial indicators are often subtle and can vary between learning speed shifts and mild physical stiffness.
+              </p>
+
+              <div class="space-y-4">
+                <h4 class="text-sm font-bold text-black uppercase tracking-wider border-b border-neutral-100 pb-2">Key Clinical Presentation:</h4>
+                <ul class="grid sm:grid-cols-2 gap-3 text-xs text-neutral-700">
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-orange font-bold">•</span>
+                    <span><strong>Learning difficulties:</strong> Mild intellectual challenges at school often precede active gait issues.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-orange font-bold">•</span>
+                    <span><strong>Gait stiffness:</strong> Clumsiness, leg fatigue, or subtle tip-toe walking.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-orange font-bold">•</span>
+                    <span><strong>Hyperreflexia:</strong> Overactive muscle reflexes (such as knee-jerk) identified in neurological exams.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-orange font-bold">•</span>
+                    <span><strong>Abnormal MRI findings:</strong> Classic "Thin Corpus Callosum" (TCC) and sometimes "Ear of the Lynx" visual signs.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="p-5 bg-neutral-50 rounded-xl border border-neutral-200">
+                <h4 class="text-xs font-bold font-mono text-black uppercase tracking-wide mb-2">Recommended Clinical Pathway</h4>
+                <p class="text-xs text-neutral-600 leading-relaxed">
+                  Caregivers should request genetic panels or exome sequencing from a neuro-genetic specialist to verify homozygous mutations in the <code class="bg-neutral-100 px-1 py-0.5 rounded text-orange">SPG11</code> gene. Brain MRIs should be scheduled to establish baseline neurological records.
+                </p>
+              </div>
+            </div>
+
+            <!-- Stage 2 Content (Hidden by default) -->
+            <div id="stage-content-2" class="space-y-6 hidden">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 bg-green/10 text-green rounded-md text-xs font-mono font-bold">STAGE 02</span>
+                <span class="text-xs font-bold text-neutral-500 uppercase tracking-widest">Motor Shifts & Progressive Neuropathy</span>
+              </div>
+              <h3 class="text-2xl font-extrabold text-black">Stage 2: Progressive Ambulation Changes</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Occurring typically 5 to 10 years following initial presentation, this stage involves a more pronounced progression of muscle stiffness extending from the legs to other motor systems, often accompanied by peripheral nerve involvement.
+              </p>
+
+              <div class="space-y-4">
+                <h4 class="text-sm font-bold text-black uppercase tracking-wider border-b border-neutral-100 pb-2">Key Clinical Presentation:</h4>
+                <ul class="grid sm:grid-cols-2 gap-3 text-xs text-neutral-700">
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-green font-bold">•</span>
+                    <span><strong>Loss of autonomous gait:</strong> Progressive transition to walking canes, rolling walkers, and manual wheelchairs.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-green font-bold">•</span>
+                    <span><strong>Distal amyotrophy:</strong> Muscle wasting/thinning in hand and foot muscles (peripheral neuropathy).</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-green font-bold">•</span>
+                    <span><strong>Dysarthria:</strong> Slurred or slow speech patterns as facial musculature begins showing mild coordination shifts.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-green font-bold">•</span>
+                    <span><strong>Urinary dysfunction:</strong> Onset of spastic bladder symptoms, including urgency or mild incontinence.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="p-5 bg-neutral-50 rounded-xl border border-neutral-200">
+                <h4 class="text-xs font-bold font-mono text-black uppercase tracking-wide mb-2">Recommended Clinical Pathway</h4>
+                <p class="text-xs text-neutral-600 leading-relaxed">
+                  Incorporate aggressive physical therapy models aimed at stretching Achilles tendons and hamstring groups. Establish connections with occupational therapists for home environmental modifications and look into custom ankle-foot orthoses (AFOs).
+                </p>
+              </div>
+            </div>
+
+            <!-- Stage 3 Content (Hidden by default) -->
+            <div id="stage-content-3" class="space-y-6 hidden">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 bg-neutral-900 text-white rounded-md text-xs font-mono font-bold">STAGE 03</span>
+                <span class="text-xs font-bold text-neutral-500 uppercase tracking-widest">Advanced Multidisciplinary Supportive Care</span>
+              </div>
+              <h3 class="text-2xl font-extrabold text-black">Stage 3: Complex Care Coordination</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Reaching 10 or more years following onset, the advanced stage centers on maximizing quality of life, skin integrity, nutritional optimization, and preventing complications related to reduced mobility.
+              </p>
+
+              <div class="space-y-4">
+                <h4 class="text-sm font-bold text-black uppercase tracking-wider border-b border-neutral-100 pb-2">Key Clinical Presentation:</h4>
+                <ul class="grid sm:grid-cols-2 gap-3 text-xs text-neutral-700">
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-neutral-500 font-bold">•</span>
+                    <span><strong>Spastic Quadriparesis:</strong> Significant muscle tightness affecting all four limbs, requiring complete power wheelchair support.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-neutral-500 font-bold">•</span>
+                    <span><strong>Severe Dysphagia:</strong> Advanced difficulty swallowing foods and liquids safely, requiring dietary changes.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-neutral-500 font-bold">•</span>
+                    <span><strong>Cognitive Changes:</strong> Progressive cognitive speed shifts, necessitating simplified communications.</span>
+                  </li>
+                  <li class="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                    <span class="text-neutral-500 font-bold">•</span>
+                    <span><strong>Parkinsonism symptoms:</strong> Development of tremors, cogwheel rigidity, or bradykinesia (slow movements).</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="p-5 bg-neutral-50 rounded-xl border border-neutral-200">
+                <h4 class="text-xs font-bold font-mono text-black uppercase tracking-wide mb-2">Recommended Clinical Pathway</h4>
+                <p class="text-xs text-neutral-600 leading-relaxed">
+                  Engage certified speech-language pathologists (SLPs) for formal swallowing assessments. Work with neurologists regarding specialized medical interventions for spasticity (including oral baclofen, botox injections, or surgically implanted intrathecal baclofen pumps).
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- AdSense slot styled nicely -->
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-4 text-center mt-12 max-w-5xl mx-auto">
+          <span class="text-[10px] font-mono tracking-widest text-neutral-400 uppercase block mb-2">ADVERTISEMENT</span>
+          <div class="bg-neutral-100 border border-dashed border-neutral-300 rounded-xl py-6 px-4 flex flex-col items-center justify-center">
+            <span class="text-xs text-neutral-400 font-mono">Google AdSense Placement Area</span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Unified Footer -->
+    <footer class="bg-neutral-950 text-neutral-400 border-t border-neutral-900 pt-16 pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-neutral-900">
+          <div class="md:col-span-5 space-y-4">
+            <a href="index.html" class="flex items-center gap-2 group p-1">
+              <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+              <span class="text-lg font-bold text-white tracking-tight">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+            </a>
+            <p class="text-sm text-neutral-500 leading-relaxed max-w-sm">
+              Providing patient empowerment, supportive staging maps, and highly authentic resources for families navigating Spastic Paraplegia type 11.
+            </p>
+          </div>
+
+          <div class="md:col-span-3 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Explore Guide</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="index.html" class="hover:text-white transition-colors">Home Portal</a></li>
+              <li><a href="about.html" class="hover:text-white transition-colors">About Our Mission</a></li>
+              <li><a href="journey.html" class="hover:text-white transition-colors">Journey & Stages</a></li>
+              <li><a href="resources.html" class="hover:text-white transition-colors">Curated Resources</a></li>
+            </ul>
+          </div>
+
+          <div class="md:col-span-4 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Support & Legal</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="contact.html" class="hover:text-white transition-colors">Contact Support Form</a></li>
+              <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy (AdSense Disclosure)</a></li>
+              <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Use Agreement</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-neutral-900 border border-neutral-800 rounded-xl space-y-3" id="universal-disclaimer-box">
+          <div class="flex items-center gap-2 text-orange font-bold text-sm">
+            <span>⚠️</span> UNIVERSAL MEDICAL DISCLAIMER
+          </div>
+          <p class="text-xs text-neutral-500 leading-relaxed">
+            The informational materials published on SPG11 Journey Tracker are compiled from public neuro-genetic data for educational guidance. No statements, diagrams, symptoms, or resource references represent clinical guidance, professional medical recommendations, diagnoses, prognosis, or active therapies. Always prioritize consulting with licensed neurologists, geneticists, or clinical speech-language therapists when tailoring specific family care plans. Never delay medical consultations based on resources located on this site.
+          </p>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600">
+          <span>&copy; 2026 SPG11 Journey Tracker. Compiled by rare disease community advocates.</span>
+          <span class="text-center sm:text-right">Structured to fully align with Google AdSense and rare-disease accessibility compliance rules.</span>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookie-consent-banner" class="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-neutral-900 text-white border-t border-neutral-800 shadow-2xl transform translate-y-full transition-transform duration-500 ease-in-out">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1 max-w-4xl">
+          <div class="flex items-center gap-2 text-sm font-bold text-orange">
+            <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+            Privacy & Advertising Preferences
+          </div>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            We use cookies and serve advertisements to support our rare-disease community resource. Ad networks like Google AdSense use cookies to deliver personalized advertising. By continuing to explore our portal, you agree to our cookie policy, terms, and privacy settings as detailed in our <a href="privacy-policy.html" class="underline text-orange hover:text-orange/80">Privacy Policy</a>.
+          </p>
+        </div>
+        <button type="button" id="cookie-accept-btn" class="w-full md:w-auto px-5 py-2.5 bg-orange hover:bg-orange/90 text-white font-medium text-sm rounded-lg transition-colors cursor-pointer whitespace-nowrap text-center">
+          Accept & Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Client-side Tab Switcher Script -->
+    <script>
+      function switchStage(stageNum) {
+        // Toggle contents
+        for (let i = 1; i <= 3; i++) {
+          const content = document.getElementById('stage-content-' + i);
+          const btn = document.getElementById('stage-btn-' + i);
+          
+          if (i === stageNum) {
+            content.classList.remove('hidden');
+            
+            // Style active button
+            btn.classList.add('border-orange/35', 'bg-white', 'shadow-sm');
+            btn.classList.remove('border-neutral-200', 'hover:bg-neutral-100');
+            
+            // Toggle internal text styling
+            const h4 = btn.querySelector('h4');
+            const circle = btn.querySelector('.w-8');
+            if (stageNum === 1) {
+              circle.className = "w-8 h-8 rounded-lg bg-orange text-white flex items-center justify-center text-xs font-mono font-bold shrink-0";
+              h4.className = "text-sm font-bold text-black";
+            } else if (stageNum === 2) {
+              circle.className = "w-8 h-8 rounded-lg bg-green text-white flex items-center justify-center text-xs font-mono font-bold shrink-0";
+              h4.className = "text-sm font-bold text-black";
+            } else {
+              circle.className = "w-8 h-8 rounded-lg bg-neutral-900 text-white flex items-center justify-center text-xs font-mono font-bold shrink-0";
+              h4.className = "text-sm font-bold text-black";
+            }
+          } else {
+            content.classList.add('hidden');
+            
+            // Style inactive button
+            btn.classList.remove('border-orange/35', 'bg-white', 'shadow-sm');
+            btn.classList.add('border-neutral-200');
+            
+            const h4 = btn.querySelector('h4');
+            const circle = btn.querySelector('.w-8');
+            circle.className = "w-8 h-8 rounded-lg bg-neutral-200 text-neutral-600 flex items-center justify-center text-xs font-mono font-bold shrink-0";
+            h4.className = "text-sm font-semibold text-neutral-700";
+          }
+        }
+      }
+    </script>
+
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

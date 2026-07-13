@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fix sandboxed iframe window.fetch read-only getter issue -->
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return currentFetch; },
+            set: function(val) { currentFetch = val; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          console.warn('Unable to patch fetch getter/setter:', e);
+        }
+      })();
+    </script>
+    <title>Privacy Policy & Cookies Disclosure — SPG11 Journey Tracker</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-black selection:bg-orange/20 selection:text-orange">
+
+    <!-- Top Info Bar -->
+    <div class="bg-black text-white text-xs py-2 px-4 text-center font-medium tracking-wide">
+      <span>SPG11 Patient & Caregiver Education Portal — Non-Clinical Support Resource</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100/80 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-2 group focus-ring rounded-lg p-1" id="logo-link">
+          <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+          <div>
+            <span class="text-lg font-bold tracking-tight text-[#1A1A1A]">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="index.html" class="sleek-nav-link" id="nav-home">Home</a>
+          <a href="about.html" class="sleek-nav-link" id="nav-about">About Mission</a>
+          <a href="journey.html" class="sleek-nav-link" id="nav-journey">Journey Guide</a>
+          <a href="resources.html" class="sleek-nav-link" id="nav-resources">Resources</a>
+          <a href="contact.html" class="sleek-nav-link" id="nav-contact">Contact</a>
+        </nav>
+
+        <!-- CTAs & Mobile Toggle -->
+        <div class="flex items-center gap-4">
+          <a href="journey.html" class="hidden lg:inline-flex items-center justify-center px-4 py-1.5 bg-green hover:bg-green/90 text-white font-semibold text-xs rounded-full transition-all shadow-sm shadow-green/10" id="header-cta">
+            View Journey Guide
+          </a>
+          <button type="button" id="mobile-menu-btn" class="p-2 text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-lg transition-colors focus:outline-none" aria-label="Toggle Menu">
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 py-4 flex-col gap-2 shadow-inner">
+        <a href="index.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Home</a>
+        <a href="about.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">About Mission</a>
+        <a href="journey.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Journey Guide</a>
+        <a href="resources.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Resources</a>
+        <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-neutral-600 hover:bg-neutral-50 hover:text-black transition-all">Contact</a>
+        <div class="h-px bg-neutral-200 my-2"></div>
+        <a href="journey.html" class="block text-center px-4 py-3 bg-green text-white font-semibold rounded-lg text-sm transition-all shadow-md">
+          Explore Journey Guide
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="animate-fade-in py-12 md:py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <!-- Header -->
+        <div class="space-y-3">
+          <span class="text-xs font-mono font-bold text-orange tracking-widest uppercase">REGULATORY & SAFETY</span>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-black tracking-tight leading-tight">
+            Privacy Policy & Cookie Disclosures
+          </h1>
+          <p class="text-sm text-neutral-500 font-mono">Last updated: July 13, 2026</p>
+        </div>
+
+        <div class="h-px bg-neutral-200"></div>
+
+        <!-- Body Content of Policy -->
+        <div class="prose prose-neutral max-w-none text-sm md:text-base text-neutral-700 space-y-6 leading-relaxed">
+          
+          <section class="space-y-3">
+            <h2 class="text-lg md:text-xl font-bold text-black">1. General Information</h2>
+            <p>
+              At the <strong>SPG11 Journey Tracker</strong>, we prioritize the confidentiality and security of our community visitors. This Privacy Policy documents the types of information compiled, processed, and recorded by our portal and explains how third-party vendors manage cookies and advertisement trackers on our platform.
+            </p>
+          </section>
+
+          <section class="space-y-3">
+            <h2 class="text-lg md:text-xl font-bold text-black">2. Google AdSense & Third-Party Cookies Disclosure</h2>
+            <p>
+              This website serves context-relevant advertisements using Google AdSense to fund our open-access publications. To deliver high-quality, relevant advertising, Google utilizes specialized cookies:
+            </p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>
+                <strong>Third-party vendor ads:</strong> Google, as a third-party vendor, uses cookies to serve personalized advertisements on this site based on your visits to this website and other platforms across the internet.
+              </li>
+              <li>
+                <strong>The DoubleClick Cookie:</strong> Google's use of advertising cookies enables it and its partner networks to serve advertisements to our users based on their visits to our site and/or other sites on the Internet.
+              </li>
+              <li>
+                <strong>Opting Out:</strong> You can completely opt-out of personalized advertising by visiting your browser’s tracking settings, disabling cookies, or directly adjusting your preferences within <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" class="text-orange hover:underline font-bold">Google Ads Settings</a>. Alternatively, you may opt out of third-party vendors' use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/" target="_blank" rel="noopener noreferrer" class="text-orange hover:underline font-bold">AboutAds.info</a>.
+              </li>
+            </ul>
+          </section>
+
+          <section class="space-y-3">
+            <h2 class="text-lg md:text-xl font-bold text-black">3. Log Files & Standard Analytics</h2>
+            <p>
+              Like most standard websites, we follow a routine procedure of utilizing anonymous log files. These files log visitors when they navigate our portal. The parameters compiled by standard logs include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamps, referring/exit pages, and the number of clicks. <strong>This information is not linked to any personally identifiable information</strong> and is used exclusively to evaluate demographic geographic metrics, improve responsiveness, and combat security threats.
+            </p>
+          </section>
+
+          <section class="space-y-3">
+            <h2 class="text-lg md:text-xl font-bold text-black">4. Medical Data & Submission Security</h2>
+            <p>
+              Our website does not manage user databases, cloud-hosted patient registers, or clinical telemetry logs. We do not prompt, process, or store clinical medical histories, DNA sequencing profiles, or private patient health records.
+            </p>
+            <p>
+              Information submitted via our <strong>Contact Form</strong> (such as name, email, and description) is processed solely to address your feedback. No contact details are sold, rented, or distributed to third-party marketing companies under any circumstances.
+            </p>
+          </section>
+
+          <section class="space-y-3">
+            <h2 class="text-lg md:text-xl font-bold text-black">5. Children’s Online Privacy Protection (COPPA)</h2>
+            <p>
+              Because Spastic Paraplegia type 11 symptoms often develop in children and adolescents, we emphasize online safety. We do not knowingly compile personally identifiable information from children under the age of 13. If a parent or guardian believes their child has submitted contact parameters on our site, please contact us immediately, and we will promptly purge those records.
+            </p>
+          </section>
+
+          <section class="space-y-3">
+            <h2 class="text-lg md:text-xl font-bold text-black">6. Consent</h2>
+            <p>
+              By continuing to explore the SPG11 Journey Tracker portal, you hereby consent to our Privacy Policy, acceptthird-party cookie practices for Google AdSense delivery, and agree to our general Terms of Use.
+            </p>
+          </section>
+
+        </div>
+
+        <div class="h-px bg-neutral-200"></div>
+
+        <!-- Horizontal AdSense Placeholder -->
+        <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-4 text-center">
+          <span class="text-[9px] font-mono tracking-widest text-neutral-400 uppercase block mb-2">ADVERTISEMENT</span>
+          <div class="bg-neutral-100 border border-dashed border-neutral-300 rounded-lg py-6 px-4 flex flex-col items-center justify-center">
+            <span class="text-xs text-neutral-400 font-mono">Google AdSense Placement Area</span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Unified Footer -->
+    <footer class="bg-neutral-950 text-neutral-400 border-t border-neutral-900 pt-16 pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-neutral-900">
+          <div class="md:col-span-5 space-y-4">
+            <a href="index.html" class="flex items-center gap-2 group p-1">
+              <div class="w-8 h-8 rounded-lg bg-[#FF6B35] flex items-center justify-center text-white font-bold shrink-0">11</div>
+              <span class="text-lg font-bold text-white tracking-tight">SPG11 <span class="text-[#2D8659]">Journey</span></span>
+            </a>
+            <p class="text-sm text-neutral-500 leading-relaxed max-w-sm">
+              Providing patient empowerment, supportive staging maps, and highly authentic resources for families navigating Spastic Paraplegia type 11.
+            </p>
+          </div>
+
+          <div class="md:col-span-3 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Explore Guide</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="index.html" class="hover:text-white transition-colors">Home Portal</a></li>
+              <li><a href="about.html" class="hover:text-white transition-colors">About Our Mission</a></li>
+              <li><a href="journey.html" class="hover:text-white transition-colors">Journey & Stages</a></li>
+              <li><a href="resources.html" class="hover:text-white transition-colors">Curated Resources</a></li>
+            </ul>
+          </div>
+
+          <div class="md:col-span-4 space-y-4">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Support & Legal</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="contact.html" class="hover:text-white transition-colors">Contact Support Form</a></li>
+              <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy (AdSense Disclosure)</a></li>
+              <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Use Agreement</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-neutral-900 border border-neutral-800 rounded-xl space-y-3" id="universal-disclaimer-box">
+          <div class="flex items-center gap-2 text-orange font-bold text-sm">
+            <span>⚠️</span> UNIVERSAL MEDICAL DISCLAIMER
+          </div>
+          <p class="text-xs text-neutral-500 leading-relaxed">
+            The informational materials published on SPG11 Journey Tracker are compiled from public neuro-genetic data for educational guidance. No statements, diagrams, symptoms, or resource references represent clinical guidance, professional medical recommendations, diagnoses, prognosis, or active therapies. Always prioritize consulting with licensed neurologists, geneticists, or clinical speech-language therapists when tailoring specific family care plans. Never delay medical consultations based on resources located on this site.
+          </p>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600">
+          <span>&copy; 2026 SPG11 Journey Tracker. Compiled by rare disease community advocates.</span>
+          <span class="text-center sm:text-right">Structured to fully align with Google AdSense and rare-disease accessibility compliance rules.</span>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookie-consent-banner" class="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-neutral-900 text-white border-t border-neutral-800 shadow-2xl transform translate-y-full transition-transform duration-500 ease-in-out">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1 max-w-4xl">
+          <div class="flex items-center gap-2 text-sm font-bold text-orange">
+            <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+            Privacy & Advertising Preferences
+          </div>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            We use cookies and serve advertisements to support our rare-disease community resource. Ad networks like Google AdSense use cookies to deliver personalized advertising. By continuing to explore our portal, you agree to our cookie policy, terms, and privacy settings as detailed in our <a href="privacy-policy.html" class="underline text-orange hover:text-orange/80">Privacy Policy</a>.
+          </p>
+        </div>
+        <button type="button" id="cookie-accept-btn" class="w-full md:w-auto px-5 py-2.5 bg-orange hover:bg-orange/90 text-white font-medium text-sm rounded-lg transition-colors cursor-pointer whitespace-nowrap text-center">
+          Accept & Close
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>
