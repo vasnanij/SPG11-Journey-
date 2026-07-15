@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCookieConsent();
   initContactForm();
   initThemeToggle();
+  initScrollToTop();
 });
 
 /**
@@ -296,4 +297,58 @@ function initThemeToggle() {
       updateIcons(true);
     }
   });
+}
+
+/**
+ * Adds and manages a floating "Scroll to Top" button that appears when scrolling past the hero section (or >300px).
+ */
+function initScrollToTop() {
+  // Create the floating action button
+  const button = document.createElement('button');
+  button.id = 'scroll-to-top';
+  button.setAttribute('aria-label', 'Scroll to top');
+  
+  // Design system alignment: custom spacing, shadow-lg, high contrast transition colors matching theme toggle Focus states
+  button.className = 'fixed bottom-6 right-6 z-50 p-3 rounded-full bg-orange text-white shadow-lg shadow-orange/20 cursor-pointer translate-y-16 opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 hover:bg-orange/90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange/50';
+  
+  // Premium vector arrow indicator
+  button.innerHTML = `
+    <svg class="w-5 h-5 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  `;
+  
+  document.body.appendChild(button);
+  
+  // Smooth scroll handler
+  button.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+  
+  const heroElement = document.getElementById('hero');
+  
+  const handleScroll = () => {
+    const scrollPos = window.scrollY || window.pageYOffset;
+    let threshold = 300;
+    
+    // Dynamically calculate threshold based on hero section size if present
+    if (heroElement) {
+      threshold = heroElement.offsetTop + heroElement.offsetHeight - 80;
+    }
+    
+    if (scrollPos > threshold) {
+      button.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+      button.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    } else {
+      button.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      button.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+    }
+  };
+  
+  // Event listener with passive performance flag
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
 }
