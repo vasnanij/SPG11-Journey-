@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initThemeToggle();
   initScrollToTop();
+  initScrollProgressBar();
 });
 
 /**
@@ -351,4 +352,44 @@ function initScrollToTop() {
   // Event listener with passive performance flag
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
+}
+
+/**
+ * Adds and manages a visual scroll-progress bar at the very top of the viewport to help users track progress through long-form pages.
+ */
+function initScrollProgressBar() {
+  // Create progress bar container
+  const container = document.createElement('div');
+  container.id = 'scroll-progress-container';
+  container.setAttribute('aria-hidden', 'true');
+  
+  // Custom styling: fixed position, top-0, z-50 (above sticky headers), custom transition
+  container.className = 'fixed top-0 left-0 w-full h-[3px] bg-neutral-100/30 dark:bg-neutral-800/20 z-[100] pointer-events-none';
+  
+  // Create progress bar fill
+  const fill = document.createElement('div');
+  fill.id = 'scroll-progress-bar';
+  
+  // Sleek thematic gradient from brand orange to green, blending rare disease visual identity
+  fill.className = 'h-full bg-gradient-to-r from-orange via-orange to-green w-0 transition-all duration-75 ease-out rounded-r-full';
+  
+  container.appendChild(fill);
+  document.body.appendChild(container);
+  
+  const updateProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
+    if (scrollHeight > 0) {
+      const percentage = (scrollTop / scrollHeight) * 100;
+      fill.style.width = `${percentage}%`;
+    } else {
+      fill.style.width = '0%';
+    }
+  };
+  
+  // Track scroll and window resize events
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
 }
