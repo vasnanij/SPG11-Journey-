@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.spg11journey.com/
+
+# Sitemaps
+Sitemap: https://www.spg11journey.com/sitemap.xml

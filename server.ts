@@ -44,6 +44,15 @@ async function startServer() {
   const app = express();
   app.use(express.json());
 
+  // Serve sitemap.xml and robots.txt explicitly
+  app.get("/sitemap.xml", (req, res) => {
+    res.sendFile(path.join(process.cwd(), "spg11-journey-tracker/public/sitemap.xml"));
+  });
+
+  app.get("/robots.txt", (req, res) => {
+    res.sendFile(path.join(process.cwd(), "spg11-journey-tracker/public/robots.txt"));
+  });
+
   // API endpoint to submit a contact inquiry
   app.post("/api/contact", async (req, res) => {
     try {
